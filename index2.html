@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chilean Food Innovation Expo</title>
+
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cinzel:wght@400;600&family=Lora:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <style>
+        /* RESET & PRINT SETTINGS */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* A4 PAPER DIMENSIONS */
+        @page {
+            size: letter;
+            margin: 0;
+        }
+
+        body {
+            font-family: 'Lora', serif;
+            background: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* A4 PAGE (8.5" x 11") = 816px x 1056px approx */
+        .page {
+            width: 8.5in;
+            min-height: 11in;
+            max-height: 11in;
+            padding: 0.5in;
+            background: #f8f5ef;
+            border: 1px solid #cbbda9;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* PRINT OPTIMIZATIONS */
+        @media print {
+            body {
+                background: none;
+                padding: 0;
+            }
+            
+            .page {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0.5in;
+                box-shadow: none;
+                border: none;
+                page-break-after: always;
+            }
+            
+            .no-print {
+                display: none !important;
+            }
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #cbbda9;
+        }
+
+        .logo {
+            width: 120px;
+            height: 60px;
+            background: #a42026;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .logo img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            padding: 5px;
+        }
+
+        /* TITLES */
+        .title-box {
+            border: 2px solid #9c8f7b;
+            padding: 12px 20px;
+            margin-bottom: 10px;
+        }
+
+        .main-title {
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            font-size: 28px;
+            color: #2e2e2e;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle-fr {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            color: #8b2e2e;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .subtitle-fr::after {
+            content: "";
+            width: 100px;
+            height: 2px;
+            background: #8b2e2e;
+            display: block;
+            margin: 10px auto 0;
+        }
+
+        /* DESCRIPTION PANEL */
+        .description {
+            text-align: center;
+            font-size: 14px;
+            line-height: 1.6;
+            padding: 18px 20px;
+            border: 1px solid #cbbda9;
+            background: #faf7f1;
+            margin-bottom: 30px;
+        }
+
+        /* EVENT INFO */
+        .event-info {
+            margin: 30px 0;
+        }
+
+        .event-box {
+            border: 2px solid #9c8f7b;
+            padding: 20px 25px;
+            background: #fdfbf6;
+            text-align: center;
+        }
+
+        .event-title {
+            font-family: 'Cinzel', serif;
+            font-size: 18px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .event-title::after {
+            content: "";
+            width: 70px;
+            height: 2px;
+            background: #8b2e2e;
+            display: block;
+            margin: 8px auto 0;
+        }
+
+        .event-line {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            margin: 8px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .event-line i {
+            color: #8b2e2e;
+            min-width: 16px;
+        }
+
+        /* PRODUCTS - OPTIMIZED FOR A4 */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .product {
+            border: 1px solid #cbbda9;
+            padding: 15px;
+            background: #fdfbf6;
+            text-align: center;
+            position: relative;
+            page-break-inside: avoid;
+        }
+
+        .product-number {
+            width: 36px;
+            height: 36px;
+            background: #2f4a5c;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .product img {
+            width: 100%;
+            height: 140px;
+            object-fit: contain;
+            margin: 12px 0;
+            border: 1px solid #bfb29d;
+            background: white;
+        }
+
+        .product h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .product h3::after {
+            content: "";
+            width: 35px;
+            height: 1.5px;
+            background: #8b2e2e;
+            display: block;
+            margin: 6px auto;
+        }
+
+        .product p {
+            font-size: 12px;
+            line-height: 1.5;
+            margin-bottom: 6px;
+        }
+
+        .product-options p {
+            font-size: 11px;
+            margin: 4px 0;
+        }
+
+        /* FOOTER */
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #cbbda9;
+        }
+
+        .footer-box {
+            text-align: center;
+            background: #f3eee6;
+            padding: 18px 20px;
+            border: 1px solid #cbbda9;
+        }
+
+        .footer-title {
+            font-family: 'Cinzel', serif;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .footer-flags {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .footer-text {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            line-height: 1.5;
+            margin-bottom: 4px;
+        }
+
+        .footer-text a {
+            color: #8b2e2e;
+            text-decoration: none;
+        }
+
+        /* PRINT BUTTON (VISIBLE ONLY ON SCREEN) */
+        .print-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #8b2e2e;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .print-button:hover {
+            background: #a42026;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PRINT BUTTON (ONLY VISIBLE ON SCREEN) -->
+    <button class="print-button no-print" onclick="window.print()">
+        <i class="fas fa-print"></i> Imprimir / Print
+    </button>
+
+    <!-- A4 PAGE -->
+    <div class="page">
+
+        <!-- HEADER -->
+        <div class="header">
+            <div class="logo">
+                <!-- Logo placeholder - replace with actual image path -->
+                <div style="width: 100%; height: 100%; background: #a42026; color: white; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat'; font-size: 12px;">
+                    Logo ProChile
+                </div>
+            </div>
+            <div class="logo">
+                <!-- Logo placeholder - replace with actual image path -->
+                <div style="width: 100%; height: 100%; background: #2f4a5c; color: white; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat'; font-size: 12px;">
+                    Hotel Plaza
+                </div>
+            </div>
+            <div class="logo">
+                <!-- Logo placeholder - replace with actual image path -->
+                <div style="width: 100%; height: 100%; background: #8b2e2e; color: white; display: flex; align-items: center; justify-content: center; font-family: 'Montserrat'; font-size: 12px;">
+                    Event Logo
+                </div>
+            </div>
+        </div>
+
+        <!-- TITLE -->
+        <div class="title-box">
+            <h1 class="main-title">Chilean Food Innovation Expo</h1>
+        </div>
+
+        <h2 class="subtitle-fr">Expo Chilienne de L'innovation Alimentaire</h2>
+
+        <!-- DESCRIPTION -->
+        <div class="description">
+            <p>
+                A curated showcase of healthy and smart food innovations from Chile,
+                including gluten-free, lactose-free and plant-based solutions for human and pet nutrition.
+            </p>
+            <p style="margin-top: 8px;">
+                Une plateforme de mise en valeur des innovations alimentaires chiliennes axées sur la santé,
+                incluant des solutions sans gluten, sans lactose et à base de plantes pour la nutrition humaine et
+                animale.
+            </p>
+        </div>
+
+        <!-- EVENT INFO -->
+        <section class="event-info">
+            <div class="event-box">
+                <h2 class="event-title">Event Information / Informations sur l'événement</h2>
+
+                <div class="event-line">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span><strong>Hotel Universel de Montreal</strong></span>
+                </div>
+
+                <div class="event-line">
+                    <i class="fa-solid fa-map"></i>
+                    <span>5000, rue Sherbrooke E, Montreal, QC, H1V 1A1</span>
+                </div>
+
+                <div class="event-line">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>514-259-2907 | www.plazapmg.com</span>
+                </div>
+
+                <div class="event-line">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span><strong>March 17, 2026 | 17 mars 2026</strong></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRODUCTS -->
+        <section class="products">
+            <div class="product">
+                <div class="product-number">1</div>
+                <!-- Image placeholder -->
+                <div style="width: 100%; height: 140px; background: #f0f0f0; border: 1px solid #bfb29d; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px; margin: 12px 0;">
+                    [MERKÉN IMAGE]
+                </div>
+                <h3>MERKÉN</h3>
+                <p>100% natural Chilean merkén, sourced from the ancestral lands of Central Araucanía, delivering a unique smoky and spicy experience that elevates any dish.</p>
+                <p>Merkén chilien 100 % naturel, issu des terres ancestrales de l'Araucanie centrale, offrant une expérience fumée et épicée unique qui sublime chaque plat.</p>
+                <p>Merkén chileno 100 % natural, proveniente de las tierras ancestrales de la Araucanía Central, que ofrece una experiencia única, ahumada y picante, capaz de elevar cualquier plato.</p>
+            </div>
+
+            <div class="product">
+                <div class="product-number">2</div>
+                <!-- Image placeholder -->
+                <div style="width: 100%; height: 140px; background: #f0f0f0; border: 1px solid #bfb29d; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px; margin: 12px 0;">
+                    [PLANT-BASED MANJAR IMAGE]
+                </div>
+                <h3>PLANT-BASED MANJAR</h3>
+                <p>Plant-based alternative to traditional dulce de leche, developed in Chile, lactose-free, gluten-free and free from animal-derived ingredients, ideal for vegan and vegetarian products.</p>
+                <p>Alternative végétale plant-based au dulce de leche traditionnel, développée au Chili, sans lactose, sans gluten et sans ingrédients d'origine animale, idéale pour les produits végans et végétariens.</p>
+                <p>Alternativa vegetal plant-based al dulce de leche tradicional, desarrollada en Chile, sin lactosa, sin gluten y sin ingredientes de origen animal, ideal para productos veganos y vegetarianos.</p>
+            </div>
+
+            <div class="product">
+                <div class="product-number">3</div>
+                <!-- Image placeholder -->
+                <div style="width: 100%; height: 140px; background: #f0f0f0; border: 1px solid #bfb29d; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px; margin: 12px 0;">
+                    [PET SNACKS IMAGE]
+                </div>
+                <h3>FUNCTIONAL PET SNACKS</h3>
+                <p>Chilean innovation in functional pet snacks: 100% natural peanut butter with botanical ingredients, designed to promote calmness and well-being in dogs.</p>
+                <p>Innovation chilienne en snacks fonctionnels pour animaux de compagnie : beurre de cacahuète 100 % naturel aux ingrédients botaniques, conçu pour favoriser le calme et le bien-être chez les chiens.</p>
+                <p>Innovación chilena en snacks funcionales para mascotas: crema de maní 100 % natural con ingredientes botánicos, diseñada para promover la calma y el bienestar en perros.</p>
+                <div class="product-options">
+                    <p><strong>KAMBÚ TRADICIONAL</strong></p>
+                    <p><strong>KAMBÚ PRO</strong></p>
+                    <p><strong>KAMBÚ OM</strong></p>
+                    <p><strong>KAMBÚ HUESITOS</strong></p>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="product-number">4</div>
+                <!-- Image placeholder -->
+                <div style="width: 100%; height: 140px; background: #f0f0f0; border: 1px solid #bfb29d; display: flex; align-items: center; justify-content: center; color: #666; font-size: 12px; margin: 12px 0;">
+                    [ALMOND MILK IMAGE]
+                </div>
+                <h3>ALMOND/COCONUT/OAT MILK – VILLAY</h3>
+                <p>Plant-based barista solution with superior foaming performance and latte art quality, designed for cafés and professional foodservice.</p>
+                <p>Solution barista plant-based offrant une performance supérieure en moussage et en latte art, conçue pour les cafés et les services professionnels.</p>
+                <p>Solución barista plant-based con desempeño superior en espumado y latte art, diseñada para cafés y servicios profesionales.</p>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="footer-box">
+                <h3 class="footer-title">LATINA INC.</h3>
+                <p class="footer-flags">🇨🇱 🇨🇦</p>
+                <p class="footer-text"><strong>Distribution Alimentaire / Food Services</strong></p>
+                <p class="footer-text">3274, rue Bossuet, N° 1<br>Montreal, QC, Canada, H1N 2S9</p>
+                <p class="footer-text">Tel: (514) 655-7808<br><a href="mailto:mramirez@videotron.ca">mramirez@videotron.ca</a></p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // Add print functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set print styles on print
+            window.addEventListener('beforeprint', function() {
+                document.body.classList.add('printing');
+            });
+            
+            window.addEventListener('afterprint', function() {
+                document.body.classList.remove('printing');
+            });
+        });
+    </script>
+
+</body>
+
+</html>
